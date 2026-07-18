@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:application.properties"/>
+    <bean id="databaseOperation" class="com.dev.spring.DatabaseOperations">
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.user}"/>
+        <property name="password" value="${database.password}"/>
+
+    </bean>
+    <bean id="car" class="com.dev.spring.vehicles.Car">
+        <constructor-arg name="operations" ref="databaseOperation"/>
+    </bean>
+    <bean id="plane" class="com.dev.spring.vehicles.Plane">
+        <property name="operations" ref="databaseOperation"/>
+    </bean>
+</beans>
